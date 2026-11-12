@@ -23,9 +23,11 @@
                     </div>
                 </form>
 
+                @if (auth()->user()->isAdmin())
                 <a href="{{ route('products.create') }}" class="inline-flex items-center justify-center px-4 py-2.5 bg-brand-primary text-white text-sm font-semibold rounded-xl shadow-md hover:bg-brand-primary-hover transition duration-200">
                     + Tambah Produk
                 </a>
+                @endif
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -48,12 +50,14 @@
                             </div>
                             <div class="mt-4 flex items-center gap-3 pt-4 border-t border-slate-100">
                                 <a href="{{ route('products.show', $product) }}" class="text-sm font-medium text-brand-primary hover:text-brand-primary">Lihat</a>
+                                @if (auth()->user()->isAdmin())
                                 <a href="{{ route('products.edit', $product) }}" class="text-sm font-medium text-yellow-600 hover:text-yellow-900">Edit</a>
                                 <form action="{{ route('products.destroy', $product) }}" method="POST" class="ml-auto" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-sm font-medium text-red-600 hover:text-red-900">Hapus</button>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>
