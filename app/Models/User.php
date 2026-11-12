@@ -23,7 +23,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'role',
         'umkm_id',
     ];
 
@@ -53,5 +55,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function umkm(): BelongsTo
     {
         return $this->belongsTo(Umkm::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isPegawai(): bool
+    {
+        return $this->role === 'pegawai';
     }
 }

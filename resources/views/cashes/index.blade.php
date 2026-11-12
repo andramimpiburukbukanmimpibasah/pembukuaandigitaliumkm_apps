@@ -101,7 +101,9 @@
                                 <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Metode</th>
                                 <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Nominal</th>
                                 <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Saldo Berjalan</th>
+                                @if (auth()->user()->isAdmin())
                                 <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
@@ -119,6 +121,7 @@
                                         {{ $cash->jenis === 'pemasukan' ? '+' : '-' }} Rp {{ number_format($cash->nominal, 0, ',', '.') }}
                                     </td>
                                     <td class="px-4 py-3 text-sm font-medium text-right text-slate-700">Rp {{ number_format($cash->saldo_berjalan, 0, ',', '.') }}</td>
+                                    @if (auth()->user()->isAdmin())
                                     <td class="px-4 py-3 text-right whitespace-nowrap">
                                         <a href="{{ route('cashes.edit', $cash) }}" class="text-yellow-600 hover:text-yellow-900 text-sm font-medium mr-2">Edit</a>
                                         <form action="{{ route('cashes.destroy', $cash) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus transaksi kas ini?')">
@@ -127,6 +130,7 @@
                                             <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">Hapus</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>

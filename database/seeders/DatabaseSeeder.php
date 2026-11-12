@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Umkm;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,11 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            UmkmSeeder::class,
+            ProductSeeder::class,
+            TransactionSeeder::class,
+            CashSeeder::class,
+        ]);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin UMKM',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'umkm_id' => Umkm::first()?->id,
         ]);
     }
 }

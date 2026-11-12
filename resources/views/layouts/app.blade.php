@@ -72,6 +72,7 @@
                         Laporan
                     </a>
 
+                    @if (auth()->user()->isAdmin())
                     <a href="{{ route('umkm-profile.index') }}" class="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition duration-150 {{ request()->routeIs('umkm-profile.*') ? 'bg-white text-[#115468] font-bold shadow-md' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
                         <svg class="w-5 h-5 shrink-0 {{ request()->routeIs('umkm-profile.*') ? 'text-[#115468]' : 'text-white/60 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
@@ -86,6 +87,16 @@
                         </svg>
                         Pengaturan
                     </a>
+                    @endif
+
+                    @if (auth()->user()->isAdmin())
+                    <a href="{{ route('employees.index') }}" class="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition duration-150 {{ request()->routeIs('employees.*') ? 'bg-white text-[#115468] font-bold shadow-md' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+                        <svg class="w-5 h-5 shrink-0 {{ request()->routeIs('employees.*') ? 'text-[#115468]' : 'text-white/60 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75h2.553a.75.75 0 0 1 .75.75v15.75c0 .414-.336.75-.75.75h-16.5a.75.75 0 0 1-.75-.75V6.75c0-.414.336-.75.75-.75h2.553m7.5 0H12v4.5h7.5Zm4.5 0h2.553a.75.75 0 0 1 .75.75v15.75c0 .414-.336.75-.75.75H12a.75.75 0 0 1-.75-.75V6.75c0-.414.336-.75.75-.75h2.553m7.5 0H12v4.5h7.5Z" />
+                        </svg>
+                        Pegawai
+                    </a>
+                    @endif
                 </nav>
 
                 <!-- Sidebar Footer / Logout -->
@@ -128,7 +139,12 @@
 
                         <div class="flex items-center gap-3">
                             <div class="text-right">
-                                <p class="text-sm font-semibold text-white leading-tight">{{ Auth::user()->name }}</p>
+                                <p class="text-sm font-semibold text-white leading-tight flex items-center gap-2 justify-end">
+                                    {{ Auth::user()->name }}
+                                    <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-white/20 text-white border border-white/30">
+                                        {{ Auth::user()->role }}
+                                    </span>
+                                </p>
                                 <p class="text-xs text-white/80 leading-tight">{{ auth()->user()->umkm?->nama_usaha }}</p>
                             </div>
                             <div class="h-10 w-10 rounded-full bg-white/20 text-white border border-white/30 backdrop-blur-sm flex items-center justify-center font-bold">

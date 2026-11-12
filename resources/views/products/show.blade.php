@@ -48,9 +48,11 @@
                 </div>
 
                 <div class="mt-6 flex items-center gap-4">
+                    @if (auth()->user()->isAdmin())
                     <a href="{{ route('products.edit', $product) }}" class="inline-flex items-center px-5 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-white text-sm font-semibold rounded-xl shadow-md transition duration-200">
                         Edit
                     </a>
+                    @endif
                     <a href="{{ route('products.index') }}" class="text-sm font-medium text-slate-600 hover:text-slate-900">Kembali</a>
                 </div>
             </div>
